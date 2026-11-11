@@ -16,6 +16,11 @@ void ASimModeWorldBase::initializeForPlay()
         vehicles.push_back(api);
     //TODO: directly accept getVehicleSimApis() using generic container
 
+    initializeForPlay(vehicles);
+}
+
+void ASimModeWorldBase::initializeForPlay(const std::vector<msr::airlib::UpdatableObject*>& vehicles)
+{
     std::unique_ptr<PhysicsEngineBase> physics_engine = createPhysicsEngine();
     physics_engine_ = physics_engine.get();
     physics_world_.reset(new msr::airlib::PhysicsWorld(std::move(physics_engine),

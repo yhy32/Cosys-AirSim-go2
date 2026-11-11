@@ -13,5 +13,11 @@ public class BlocksEditorTarget : TargetRules
         IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
         //bUseUnityBuild = false;
         //bUsePCHFiles = false;
+        // The bundled rpclib msgpack preprocessor headers do not support the
+        // conforming MSVC preprocessor, which UBT enables by default in UE 5.5
+        if (Target.Platform == UnrealTargetPlatform.Win64) {
+            AdditionalCompilerArguments = "/Zc:preprocessor-";
+            bOverrideBuildEnvironment = true;
+        }
     }
 }

@@ -1,0 +1,24 @@
+newmtl black
+Kd 0.0 0.0 0.0
+Ka 0 0 0
+Ks 0.1 0.1 0.1
+Ns 20
+
+newmtl white
+Kd 1.0 1.0 1.0
+Ka 0 0 0
+Ks 0.1 0.1 0.1
+Ns 20
+
+newmtl gray
+Kd 0.671705 0.692426 0.77427
+Ka 0 0 0
+Ks 0.1 0.1 0.1
+Ns 20
+
+newmtl metal
+Kd 0.9 0.95 0.95
+Ka 0 0 0
+Ks 0.1 0.1 0.1
+Ns 20
+

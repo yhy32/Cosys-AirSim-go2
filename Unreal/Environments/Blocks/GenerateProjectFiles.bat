@@ -7,5 +7,5 @@ del /q gen_temp.tmp
 del /q gen_temp.txt
 for %%f in (*.uproject) do (
 		echo Generating files for %%f
-		%gen_bin% /projectfiles "%cd%\%%f"
+		"%gen_bin%" -ProjectFiles -Project="%cd%\%%f" -Game -Progress
 )

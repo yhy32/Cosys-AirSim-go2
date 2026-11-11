@@ -44,6 +44,8 @@ protected:
 
     //should be called by derived class once all api_provider_ is ready to use
     void initializeForPlay();
+    //variant that only registers the given updatable objects in the AirSim physics world
+    void initializeForPlay(const std::vector<msr::airlib::UpdatableObject*>& vehicles);
 
     //used for adding physics bodies on the fly
     virtual void registerPhysicsBody(msr::airlib::VehicleSimApiBase* physicsBody) override;

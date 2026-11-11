@@ -38,6 +38,7 @@ namespace airlib
         static constexpr char const* kVehicleTypePioneer = "pioneer";
         static constexpr char const* kVehicleTypeArduRover = "ardurover";
         static constexpr char const* kVehicleTypeComputerVision = "computervision";
+        static constexpr char const* kVehicleTypeGo2 = "go2";
 
         static constexpr char const* kVehicleInertialFrame = "VehicleInertialFrame";
         static constexpr char const* kSensorLocalFrame = "SensorLocalFrame";
@@ -46,6 +47,8 @@ namespace airlib
         static constexpr char const* kSimModeTypeCar = "Car";
         static constexpr char const* kSimModeTypeSkidVehicle = "SkidVehicle";
         static constexpr char const* kSimModeTypeComputerVision = "ComputerVision";
+        static constexpr char const* kSimModeTypeHybrid = "Hybrid";
+        static constexpr char const* kSimModeTypeGo2 = "Go2";
 
         struct SubwindowSetting
         {
@@ -797,7 +800,7 @@ namespace airlib
 
             physics_engine_name = settings_json.getString("PhysicsEngineName", "");
             if (physics_engine_name == "") {
-                if (simmode_name == kSimModeTypeMultirotor)
+                if (simmode_name == kSimModeTypeMultirotor || simmode_name == kSimModeTypeHybrid)
                     physics_engine_name = "FastPhysicsEngine";
                 else
                     physics_engine_name = "PhysX"; //this value is only informational for now
@@ -1063,7 +1066,19 @@ namespace airlib
 
             loadCameraSettings(settings_json, vehicle_setting->cameras, camera_defaults);
             loadVehicleLightSettings(settings_json, vehicle_setting->lights);
-            loadSensorSettings(settings_json, "Sensors", vehicle_setting->sensors, sensor_defaults, simmode_name);
+            if (simmode_name == kSimModeTypeHybrid) {
+                // In hybrid mode the SimMode-level defaults don't apply; pick
+                // defaults based on the individual vehicle type instead.
+                std::map<std::string, std::shared_ptr<SensorSetting>> type_defaults;
+                if (isMultirotorVehicleType(vehicle_type))
+                    createDefaultSensorSettings(kSimModeTypeMultirotor, type_defaults);
+                else if (isCarVehicleType(vehicle_type))
+                    createDefaultSensorSettings(kSimModeTypeCar, type_defaults);
+                loadSensorSettings(settings_json, "Sensors", vehicle_setting->sensors, type_defaults, simmode_name);
+            }
+            else {
+                loadSensorSettings(settings_json, "Sensors", vehicle_setting->sensors, sensor_defaults, simmode_name);
+            }
 
             return vehicle_setting;
         }
@@ -1209,6 +1224,16 @@ namespace airlib
                 cv_setting->sensors = sensor_defaults;
                 vehicles[cv_setting->vehicle_name] = std::move(cv_setting);
             }
+            else if (simmode_name == kSimModeTypeHybrid) {
+                // Hybrid mode has no implicit default vehicle: all vehicles must be
+                // declared under "Vehicles" in settings.json
+            }
+            else if (simmode_name == kSimModeTypeGo2) {
+                // Rendering-only Go2; MuJoCo supplies the state
+                auto go2_setting = std::unique_ptr<VehicleSetting>(new VehicleSetting("Go2", kVehicleTypeGo2));
+                go2_setting->sensors = sensor_defaults;
+                vehicles[go2_setting->vehicle_name] = std::move(go2_setting);
+            }
             else {
                 throw std::invalid_argument(Utils::stringf(
                                                 "Unknown SimMode: %s, failed to set default vehicle settings", simmode_name.c_str())
@@ -1323,6 +1348,8 @@ namespace airlib
                 PawnPath("Class'/AirSim/VehicleAdv/BoxCar/BoxCarPawn.BoxCarPawn_C'"));
             pawn_paths.emplace("DefaultComputerVision",
                                PawnPath("Class'/AirSim/Blueprints/BP_ComputerVisionPawn.BP_ComputerVisionPawn_C'"));
+            pawn_paths.emplace("DefaultGo2",
+                               PawnPath("Class'/Script/AirSim.Go2Pawn'"));
         }
 
         static void loadPawnPaths(const Settings& settings_json, std::map<std::string, PawnPath>& pawn_paths)
@@ -1749,8 +1776,8 @@ namespace airlib
                 //default value
                 clock_type = "ScalableClock";
 
-                //override if multirotor simmode with simple_flight
-                if (simmode_name == kSimModeTypeMultirotor) {
+                //override if multirotor/hybrid simmode with simple_flight
+                if (simmode_name == kSimModeTypeMultirotor || simmode_name == kSimModeTypeHybrid) {
                     //TODO: this won't work if simple_flight and PX4 is combined together!
 
                     //for multirotors we select steppable fixed interval clock unless we have
@@ -1871,6 +1898,23 @@ namespace airlib
                 if ((present_sensors_bitmask & (1U << type)) == 0)
                     sensors[p.first] = p.second;
             }
+        }
+
+        static bool isMultirotorVehicleType(const std::string& vehicle_type)
+        {
+            return vehicle_type == kVehicleTypeSimpleFlight ||
+                   vehicle_type == kVehicleTypePX4 ||
+                   vehicle_type == kVehicleTypeArduCopterSolo ||
+                   vehicle_type == kVehicleTypeArduCopter;
+        }
+
+        static bool isCarVehicleType(const std::string& vehicle_type)
+        {
+            return vehicle_type == kVehicleTypePhysXCar ||
+                   vehicle_type == kVehicleTypeBoxCar ||
+                   vehicle_type == kVehicleTypeArduRover ||
+                   vehicle_type == kVehicleTypeCPHusky ||
+                   vehicle_type == kVehicleTypePioneer;
         }
 
         // creates default sensor list when none specified in json

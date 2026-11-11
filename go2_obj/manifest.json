@@ -1,0 +1,542 @@
+{
+  "source": "C:\\BUPT\\mujoco_menagerie\\unitree_go2",
+  "unit": "meter",
+  "coordinate_system": "MuJoCo body frames: +X forward, +Y left, +Z up (right-handed)",
+  "ue_import_scale": 100,
+  "ue_note": "Import OBJ at scale 100 to get centimeters. MuJoCo +Y is left; UE +Y is right, so either mirror the root (Scale Y=-1) or treat +Y as left and keep joint signs as-is.",
+  "parts": [
+    {
+      "obj": "parts/base.obj",
+      "vertices": 66681,
+      "bounds_min_m": [
+        -0.128,
+        -0.0972,
+        -0.0968
+      ],
+      "bounds_max_m": [
+        0.332,
+        0.0968,
+        0.0888
+      ],
+      "name": "base"
+    },
+    {
+      "obj": "parts/FL_hip.obj",
+      "vertices": 37963,
+      "bounds_min_m": [
+        -0.0696,
+        -0.0381,
+        -0.0494
+      ],
+      "bounds_max_m": [
+        0.0485,
+        0.0375,
+        0.0491
+      ],
+      "name": "FL_hip"
+    },
+    {
+      "obj": "parts/FR_hip.obj",
+      "vertices": 37963,
+      "bounds_min_m": [
+        -0.0696,
+        -0.0375,
+        -0.0491
+      ],
+      "bounds_max_m": [
+        0.0485,
+        0.0381,
+        0.0494
+      ],
+      "name": "FR_hip"
+    },
+    {
+      "obj": "parts/RL_hip.obj",
+      "vertices": 37963,
+      "bounds_min_m": [
+        -0.0485,
+        -0.0381,
+        -0.0491
+      ],
+      "bounds_max_m": [
+        0.0696,
+        0.0375,
+        0.0494
+      ],
+      "name": "RL_hip"
+    },
+    {
+      "obj": "parts/RR_hip.obj",
+      "vertices": 37963,
+      "bounds_min_m": [
+        -0.0485,
+        -0.0375,
+        -0.0494
+      ],
+      "bounds_max_m": [
+        0.0696,
+        0.0381,
+        0.0491
+      ],
+      "name": "RR_hip"
+    },
+    {
+      "obj": "parts/FL_thigh.obj",
+      "vertices": 28684,
+      "bounds_min_m": [
+        -0.0484,
+        -0.0568,
+        -0.2274
+      ],
+      "bounds_max_m": [
+        0.0485,
+        0.0166,
+        0.0506
+      ],
+      "name": "FL_thigh"
+    },
+    {
+      "obj": "parts/FL_calf.obj",
+      "vertices": 21464,
+      "bounds_min_m": [
+        -0.026,
+        -0.0198,
+        -0.2359
+      ],
+      "bounds_max_m": [
+        0.0324,
+        0.02,
+        0.0311
+      ],
+      "name": "FL_calf"
+    },
+    {
+      "obj": "parts/FR_thigh.obj",
+      "vertices": 28631,
+      "bounds_min_m": [
+        -0.0484,
+        -0.0166,
+        -0.2274
+      ],
+      "bounds_max_m": [
+        0.0485,
+        0.0568,
+        0.0506
+      ],
+      "name": "FR_thigh"
+    },
+    {
+      "obj": "parts/FR_calf.obj",
+      "vertices": 21466,
+      "bounds_min_m": [
+        -0.026,
+        -0.02,
+        -0.2359
+      ],
+      "bounds_max_m": [
+        0.0324,
+        0.0198,
+        0.0311
+      ],
+      "name": "FR_calf"
+    },
+    {
+      "obj": "parts/RL_thigh.obj",
+      "vertices": 28684,
+      "bounds_min_m": [
+        -0.0484,
+        -0.0568,
+        -0.2274
+      ],
+      "bounds_max_m": [
+        0.0485,
+        0.0166,
+        0.0506
+      ],
+      "name": "RL_thigh"
+    },
+    {
+      "obj": "parts/RL_calf.obj",
+      "vertices": 21464,
+      "bounds_min_m": [
+        -0.026,
+        -0.0198,
+        -0.2359
+      ],
+      "bounds_max_m": [
+        0.0324,
+        0.02,
+        0.0311
+      ],
+      "name": "RL_calf"
+    },
+    {
+      "obj": "parts/RR_thigh.obj",
+      "vertices": 28631,
+      "bounds_min_m": [
+        -0.0484,
+        -0.0166,
+        -0.2274
+      ],
+      "bounds_max_m": [
+        0.0485,
+        0.0568,
+        0.0506
+      ],
+      "name": "RR_thigh"
+    },
+    {
+      "obj": "parts/RR_calf.obj",
+      "vertices": 21466,
+      "bounds_min_m": [
+        -0.026,
+        -0.02,
+        -0.2359
+      ],
+      "bounds_max_m": [
+        0.0324,
+        0.0198,
+        0.0311
+      ],
+      "name": "RR_calf"
+    }
+  ],
+  "joints": [
+    {
+      "name": "FL_hip_joint",
+      "child_part": "FL_hip",
+      "parent_part": "base",
+      "axis_mujoco": [
+        1,
+        0,
+        0
+      ],
+      "pos_in_parent_m": [
+        0.1934,
+        0.0465,
+        0
+      ],
+      "pos_in_parent_cm": [
+        19.34,
+        4.65,
+        0
+      ],
+      "range_rad": [
+        -1.0472,
+        1.0472
+      ],
+      "range_deg": [
+        -60.0,
+        60.0
+      ]
+    },
+    {
+      "name": "FR_hip_joint",
+      "child_part": "FR_hip",
+      "parent_part": "base",
+      "axis_mujoco": [
+        1,
+        0,
+        0
+      ],
+      "pos_in_parent_m": [
+        0.1934,
+        -0.0465,
+        0
+      ],
+      "pos_in_parent_cm": [
+        19.34,
+        -4.65,
+        0
+      ],
+      "range_rad": [
+        -1.0472,
+        1.0472
+      ],
+      "range_deg": [
+        -60.0,
+        60.0
+      ]
+    },
+    {
+      "name": "RL_hip_joint",
+      "child_part": "RL_hip",
+      "parent_part": "base",
+      "axis_mujoco": [
+        1,
+        0,
+        0
+      ],
+      "pos_in_parent_m": [
+        -0.1934,
+        0.0465,
+        0
+      ],
+      "pos_in_parent_cm": [
+        -19.34,
+        4.65,
+        0
+      ],
+      "range_rad": [
+        -1.0472,
+        1.0472
+      ],
+      "range_deg": [
+        -60.0,
+        60.0
+      ]
+    },
+    {
+      "name": "RR_hip_joint",
+      "child_part": "RR_hip",
+      "parent_part": "base",
+      "axis_mujoco": [
+        1,
+        0,
+        0
+      ],
+      "pos_in_parent_m": [
+        -0.1934,
+        -0.0465,
+        0
+      ],
+      "pos_in_parent_cm": [
+        -19.34,
+        -4.65,
+        0
+      ],
+      "range_rad": [
+        -1.0472,
+        1.0472
+      ],
+      "range_deg": [
+        -60.0,
+        60.0
+      ]
+    },
+    {
+      "name": "FL_thigh_joint",
+      "child_part": "FL_thigh",
+      "parent_part": "FL_hip",
+      "axis_mujoco": [
+        0,
+        1,
+        0
+      ],
+      "pos_in_parent_m": [
+        0,
+        0.0955,
+        0
+      ],
+      "pos_in_parent_cm": [
+        0,
+        9.55,
+        0
+      ],
+      "range_rad": [
+        -1.5708,
+        3.4907
+      ],
+      "range_deg": [
+        -90.0,
+        200.0
+      ]
+    },
+    {
+      "name": "FR_thigh_joint",
+      "child_part": "FR_thigh",
+      "parent_part": "FR_hip",
+      "axis_mujoco": [
+        0,
+        1,
+        0
+      ],
+      "pos_in_parent_m": [
+        0,
+        -0.0955,
+        0
+      ],
+      "pos_in_parent_cm": [
+        0,
+        -9.55,
+        0
+      ],
+      "range_rad": [
+        -1.5708,
+        3.4907
+      ],
+      "range_deg": [
+        -90.0,
+        200.0
+      ]
+    },
+    {
+      "name": "RL_thigh_joint",
+      "child_part": "RL_thigh",
+      "parent_part": "RL_hip",
+      "axis_mujoco": [
+        0,
+        1,
+        0
+      ],
+      "pos_in_parent_m": [
+        0,
+        0.0955,
+        0
+      ],
+      "pos_in_parent_cm": [
+        0,
+        9.55,
+        0
+      ],
+      "range_rad": [
+        -0.5236,
+        4.5379
+      ],
+      "range_deg": [
+        -30.0,
+        260.0
+      ]
+    },
+    {
+      "name": "RR_thigh_joint",
+      "child_part": "RR_thigh",
+      "parent_part": "RR_hip",
+      "axis_mujoco": [
+        0,
+        1,
+        0
+      ],
+      "pos_in_parent_m": [
+        0,
+        -0.0955,
+        0
+      ],
+      "pos_in_parent_cm": [
+        0,
+        -9.55,
+        0
+      ],
+      "range_rad": [
+        -0.5236,
+        4.5379
+      ],
+      "range_deg": [
+        -30.0,
+        260.0
+      ]
+    },
+    {
+      "name": "FL_calf_joint",
+      "child_part": "FL_calf",
+      "parent_part": "FL_thigh",
+      "axis_mujoco": [
+        0,
+        1,
+        0
+      ],
+      "pos_in_parent_m": [
+        0,
+        0,
+        -0.213
+      ],
+      "pos_in_parent_cm": [
+        0,
+        0,
+        -21.3
+      ],
+      "range_rad": [
+        -2.7227,
+        -0.83776
+      ],
+      "range_deg": [
+        -156.0,
+        -48.0
+      ]
+    },
+    {
+      "name": "FR_calf_joint",
+      "child_part": "FR_calf",
+      "parent_part": "FR_thigh",
+      "axis_mujoco": [
+        0,
+        1,
+        0
+      ],
+      "pos_in_parent_m": [
+        0,
+        0,
+        -0.213
+      ],
+      "pos_in_parent_cm": [
+        0,
+        0,
+        -21.3
+      ],
+      "range_rad": [
+        -2.7227,
+        -0.83776
+      ],
+      "range_deg": [
+        -156.0,
+        -48.0
+      ]
+    },
+    {
+      "name": "RL_calf_joint",
+      "child_part": "RL_calf",
+      "parent_part": "RL_thigh",
+      "axis_mujoco": [
+        0,
+        1,
+        0
+      ],
+      "pos_in_parent_m": [
+        0,
+        0,
+        -0.213
+      ],
+      "pos_in_parent_cm": [
+        0,
+        0,
+        -21.3
+      ],
+      "range_rad": [
+        -2.7227,
+        -0.83776
+      ],
+      "range_deg": [
+        -156.0,
+        -48.0
+      ]
+    },
+    {
+      "name": "RR_calf_joint",
+      "child_part": "RR_calf",
+      "parent_part": "RR_thigh",
+      "axis_mujoco": [
+        0,
+        1,
+        0
+      ],
+      "pos_in_parent_m": [
+        0,
+        0,
+        -0.213
+      ],
+      "pos_in_parent_cm": [
+        0,
+        0,
+        -21.3
+      ],
+      "range_rad": [
+        -2.7227,
+        -0.83776
+      ],
+      "range_deg": [
+        -156.0,
+        -48.0
+      ]
+    }
+  ]
+}
