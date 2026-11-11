@@ -1,0 +1,16 @@
+{
+  "SettingsVersion": 2,
+  "SimMode": "Go2",
+  "ApiServerPort": 41451,
+  "ClockType": "ScalableClock",
+  "Vehicles": {
+    "go2": {
+      "VehicleType": "go2",
+      "AutoCreate": true,
+      "PawnPath": "DefaultGo2",
+      "X": 0,
+      "Y": 0,
+      "Z": 0
+    }
+  }
+}

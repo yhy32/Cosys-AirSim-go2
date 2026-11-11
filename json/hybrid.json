@@ -1,0 +1,24 @@
+{
+  "SettingsVersion": 2,
+  "SimMode": "Hybrid",
+  "ApiServerPort": 41451,
+  "PhysicsEngineName": "FastPhysicsEngine",
+  "ClockType": "SteppableClock",
+  "Vehicles": {
+    "Car1": {
+      "VehicleType": "PhysXCar",
+      "AutoCreate": true,
+      "IsFpvVehicle": true,
+      "X": 10,
+      "Y": 0,
+      "Z": 0
+    },
+    "Drone1": {
+      "VehicleType": "SimpleFlight",
+      "AutoCreate": true,
+      "X": 0,
+      "Y": 0,
+      "Z": -5
+    }
+  }
+}
